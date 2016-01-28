@@ -1,0 +1,38 @@
+{
+  "name": "alaska-user",
+  "version": "0.0.1",
+  "description": "Alaska user service",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-plugin-syntax-async-functions": "^6.3.13",
+    "babel-plugin-syntax-class-properties": "^6.3.13",
+    "babel-plugin-transform-class-properties": "^6.4.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.4.0",
+    "babel-plugin-transform-es2015-parameters": "^6.4.2",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
+    "rimraf": "*"
+  },
+  "peerDependencies": {
+    "alaska": "^0.0.4"
+  },
+  "scripts": {
+    "watch": "babel ./src --out-dir ./lib -w",
+    "build": "babel ./src --out-dir ./lib",
+    "prebuild": "rimraf lib",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maichong/alaska-user.git"
+  },
+  "author": {
+    "email": "liang@maichong.it",
+    "name": "Liang",
+    "url": "https://github.com/liangxingchen"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maichong/alaska-user/issues"
+  },
+  "homepage": "https://github.com/maichong/alaska-user#readme"
+}
