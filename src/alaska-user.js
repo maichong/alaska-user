@@ -5,6 +5,7 @@
  */
 
 import alaska from 'alaska';
+import collie from 'collie';
 
 /**
  * @class UserService
@@ -16,6 +17,7 @@ export default class UserService extends alaska.Service {
     options.id = 'alaska-user';
     options.dir = __dirname;
     super(options, alaska);
+    collie(this, 'create');
   }
 
   async create(data) {
