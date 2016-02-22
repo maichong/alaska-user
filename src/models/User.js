@@ -6,7 +6,7 @@
 
 const service = __service;
 
-export default class Item extends service.Model {
+export default class User extends service.Model {
 
   static fields = {
     email: {
