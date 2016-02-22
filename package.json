@@ -2,7 +2,7 @@
   "name": "alaska-user",
   "version": "0.0.1",
   "description": "Alaska user service",
-  "main": "index.js",
+  "main": "lib/alaska-user.js",
   "devDependencies": {
     "babel-plugin-syntax-async-functions": "^6.3.13",
     "babel-plugin-syntax-class-properties": "^6.3.13",
