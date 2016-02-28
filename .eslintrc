@@ -3,9 +3,13 @@
   "env": {
     "node": true
   },
+  "globals": {
+    "__service" : true
+  },
   "parser": "babel-eslint",
   "rules": {
     "prefer-const": 0,
+    "prefer-template": 0,
     "no-param-reassign": 0,
     "comma-dangle": [1, "never"],
     "spaced-comment": [0, "always"],

@@ -34,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/maichong/alaska-user/issues"
   },
-  "homepage": "https://github.com/maichong/alaska-user#readme"
+  "homepage": "https://github.com/maichong/alaska-user#readme",
+  "dependencies": {
+    "md5": "^2.0.0"
+  }
 }
