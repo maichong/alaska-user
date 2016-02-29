@@ -14,6 +14,10 @@ export default class Ability extends service.Model {
       index: true,
       required: true
     },
+    service: {
+      label: '所属模块',
+      type: String
+    },
     desc: {
       label: '描述',
       type: String
@@ -32,5 +36,13 @@ export default class Ability extends service.Model {
     if (!this.createdAt) {
       this.createdAt = new Date;
     }
+  }
+
+  async postSave() {
+    await service.clearCache();
+  }
+
+  async postRemove() {
+    await service.clearCache();
   }
 }

@@ -12,6 +12,7 @@ import Ability from './Ability';
 import Role from './Role';
 
 export default class User extends service.Model {
+  
   static fields = {
     username: {
       label: '用户名',

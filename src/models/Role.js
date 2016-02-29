@@ -10,12 +10,16 @@ import Ability from './Ability';
 
 export default class Role extends service.Model {
   static fields = {
-    title: {
-      label: '名称',
+    name: {
+      label: '角色名',
       type: String,
       index: true,
       sort: 1,
       required: true
+    },
+    service: {
+      label: '所属模块',
+      type: String
     },
     desc: {
       label: '角色描述',
@@ -41,6 +45,14 @@ export default class Role extends service.Model {
     if (!this.createdAt) {
       this.createdAt = new Date;
     }
+  }
+
+  async postSave() {
+    await service.clearCache();
+  }
+
+  async postRemove() {
+    await service.clearCache();
   }
 
   /**
