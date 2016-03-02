@@ -64,8 +64,7 @@ export default class User extends service.Model {
    * @returns {boolean}
    */
   auth(password) {
-    return this.password === password;
-    //return this.password === md5(password);
+    return this.password === md5(password);
   }
 
   /**
