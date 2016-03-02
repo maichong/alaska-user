@@ -53,18 +53,17 @@ export default class Role extends service.Model {
 
   /**
    * 判断角色是否具有某权限
-   * @param name
+   * @param id
    * @returns {boolean}
    */
-  async hasAbility(name) {
+  async hasAbility(id) {
     if (this.abilities) {
       for (let aid of this.abilities) {
         //如果abilities属性中储存的是Ability对象
-        if (aid.name && aid.name == name) {
+        if (aid._id && aid._id == id) {
           return true;
         }
-        let ability = await Ability.getCache(aid);
-        if (ability && ability.name == name) {
+        if (aid == id) {
           return true;
         }
       }

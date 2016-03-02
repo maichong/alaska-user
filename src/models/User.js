@@ -70,10 +70,10 @@ export default class User extends service.Model {
 
   /**
    * 判断用户是否有指定权限
-   * @param name
+   * @param id
    * @returns {boolean}
    */
-  async hasAbility(name) {
+  async hasAbility(id) {
     let superUser = service.config('superUser');
     if (superUser && this.id === superUser) {
       return true;
@@ -83,11 +83,10 @@ export default class User extends service.Model {
     if (this.abilities) {
       for (let aid of this.abilities) {
         //如果abilities属性中储存的是Ability对象
-        if (aid.name && aid.name == name) {
+        if (aid._id && aid._id == id) {
           return true;
         }
-        let ability = await Ability.getCache(aid);
-        if (ability && ability.name == name) {
+        if (aid == id) {
           return true;
         }
       }
@@ -100,7 +99,7 @@ export default class User extends service.Model {
         if (!role.hasAbility) {
           role = await Role.getCache(rid);
         }
-        if (await role.hasAbility(name)) {
+        if (await role.hasAbility(id)) {
           return true;
         }
       }
