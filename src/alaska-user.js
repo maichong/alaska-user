@@ -64,7 +64,7 @@ export default class UserService extends alaska.Service {
       alaska.error('Account not found', 1);
     }
     if (!user.auth(password)) {
-      alaska.error('Account not found', 2);
+      alaska.error('Password is not matched', 2);
     }
 
     ctx.session.userId = user.id;
@@ -123,14 +123,16 @@ export default class UserService extends alaska.Service {
    * @returns {boolean|Ability}
    */
   async registerAbility(data) {
+    let id = data._id || data.id;
     let abilities = await this.getAbilities();
-    if (_.find(abilities, ability => ability.name == data.name)) {
+    if (_.find(abilities, ability => ability._id == id)) {
       //权限已经存在
       return false;
     }
-    console.log(`Register ability : ${data.name}`);
+    console.log(`Register ability : ${id}`);
     let Ability = this.model('Ability');
     let ability = new Ability(data);
+    ability._id = id;
     await ability.save();
     return ability;
   }
@@ -142,51 +144,33 @@ export default class UserService extends alaska.Service {
    * @returns {boolean|Role}
    */
   async registerRole(data) {
+    let id = data._id || data.id;
     let roles = await this.getRoles();
-    if (_.find(roles, role => role.name == data.name)) {
+    if (_.find(roles, role => role._id == id)) {
       //角色已经存在
       return false;
     }
-    console.log(`Register role : ${data.name}`);
+    console.log(`Register role : ${id}`);
     let Role = this.model('Role');
     let abilities = [];
     let abilitiesMap = {};
     let allAbilities = await this.getAbilities();
     allAbilities.forEach(a => {
-      abilitiesMap[a.name] = a._id;
+      abilitiesMap[a._id] = a._id;
     });
     if (data.abilities) {
-      for (let abilityName of data.abilities) {
-        if (!abilitiesMap[abilityName]) {
-          throw new Error(`Ability ${abilityName} not found when register role ${data.name}`);
+      for (let abilityId of data.abilities) {
+        if (!abilitiesMap[abilityId]) {
+          throw new Error(`Ability ${abilityId} not found when register role ${data.id}`);
         }
-        abilities.push(abilitiesMap[abilityName]);
+        abilities.push(abilityId);
       }
     }
     data.abilities = abilities;
     let role = new Role(data);
+    role._id = id;
     await role.save();
     return role;
-  }
-
-  /**
-   * 依据名称获取指定权限
-   * @param name
-   * @returns {Ability}
-   */
-  async getAbilityByName(name) {
-    let abilities = await this.getAbilities();
-    return _.find(abilities, ability => ability.name === name);
-  }
-
-  /**
-   * 依据名称获取指定角色
-   * @param name
-   * @returns {Role}
-   */
-  async getRoleByName(name) {
-    let roles = await this.getRoles();
-    return _.find(roles, role => role.name === name);
   }
 
   /**

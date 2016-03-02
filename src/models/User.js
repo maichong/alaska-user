@@ -12,7 +12,7 @@ import Ability from './Ability';
 import Role from './Role';
 
 export default class User extends service.Model {
-  
+
   static fields = {
     username: {
       label: '用户名',
@@ -31,19 +31,20 @@ export default class User extends service.Model {
       label: '密码',
       type: 'password',
       sort: 2,
-      default: 1
+      default: 1,
+      private: true
     },
     roles: {
       label: '角色',
-      type: 'relationship',
-      ref: 'Role',
-      many: true
+      type: [Role],
+      many: true,
+      private: true
     },
     abilities: {
       label: '能力',
-      type: 'relationship',
-      ref: 'Ability',
-      many: true
+      type: [Ability],
+      many: true,
+      private: true
     },
     createdAt: {
       label: '注册时间',
@@ -63,7 +64,8 @@ export default class User extends service.Model {
    * @returns {boolean}
    */
   auth(password) {
-    return this.password === md5(password);
+    return this.password === password;
+    //return this.password === md5(password);
   }
 
   /**
@@ -98,7 +100,7 @@ export default class User extends service.Model {
         if (!role.hasAbility) {
           role = await Role.getCache(rid);
         }
-        if (role.hasAbility(name)) {
+        if (await role.hasAbility(name)) {
           return true;
         }
       }

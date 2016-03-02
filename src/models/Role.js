@@ -9,14 +9,11 @@ const service = __service;
 import Ability from './Ability';
 
 export default class Role extends service.Model {
+
+  static defaultSort = '-sort';
+
   static fields = {
-    name: {
-      label: '角色名',
-      type: String,
-      index: true,
-      sort: 1,
-      required: true
-    },
+    _id: String,
     service: {
       label: '所属模块',
       type: String
@@ -27,8 +24,7 @@ export default class Role extends service.Model {
     },
     abilities: {
       label: '权限',
-      type: 'relationship',
-      ref: 'Ability',
+      type: [Ability],
       many: true
     },
     sort: {

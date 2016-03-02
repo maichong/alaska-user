@@ -7,13 +7,9 @@
 const service = __service;
 
 export default class Ability extends service.Model {
+
   static fields = {
-    name: {
-      label: '权限',
-      type: String,
-      index: true,
-      required: true
-    },
+    _id: String,
     service: {
       label: '所属模块',
       type: String
@@ -21,10 +17,6 @@ export default class Ability extends service.Model {
     desc: {
       label: '描述',
       type: String
-    },
-    sort: {
-      label: '排序',
-      type: Number
     },
     createdAt: {
       label: '创建时间',
