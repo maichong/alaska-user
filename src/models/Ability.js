@@ -8,14 +8,18 @@ const service = __service;
 
 export default class Ability extends service.Model {
 
+  static label = '权限';
+
+  static defaultColumns = '_id,title,service,createdAt';
+
   static fields = {
     _id: String,
-    service: {
-      label: '所属模块',
+    title: {
+      label: '标题',
       type: String
     },
-    desc: {
-      label: '描述',
+    service: {
+      label: '所属模块',
       type: String
     },
     createdAt: {

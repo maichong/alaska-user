@@ -13,6 +13,12 @@ import Role from './Role';
 
 export default class User extends service.Model {
 
+  static label = '用户';
+
+  static title = 'username';
+
+  static defaultColumns = 'username,email,createdAt';
+
   static fields = {
     username: {
       label: '用户名',
@@ -73,7 +79,7 @@ export default class User extends service.Model {
    * @returns {boolean}
    */
   async hasAbility(id) {
-    let superUser = service.config('superUser');
+    let superUser = service.alaska.config(true, 'superUser');
     if (superUser && this.id === superUser) {
       return true;
     }

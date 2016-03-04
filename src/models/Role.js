@@ -10,16 +10,20 @@ import Ability from './Ability';
 
 export default class Role extends service.Model {
 
+  static label = '角色';
+
   static defaultSort = '-sort';
+
+  static defaultColumns = '_id,title,service,sort,createdAt';
 
   static fields = {
     _id: String,
-    service: {
-      label: '所属模块',
+    title: {
+      label: '标题',
       type: String
     },
-    desc: {
-      label: '角色描述',
+    service: {
+      label: '所属模块',
       type: String
     },
     abilities: {

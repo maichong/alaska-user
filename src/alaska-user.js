@@ -35,6 +35,13 @@ export default class UserService extends alaska.Service {
           let Model = service.model('User');
           ctx.user = await Model.getCache(userId);
         }
+        ctx.checkAbility = async function (id) {
+          if (ctx.user && await ctx.user.hasAbility(id)) {
+            return true;
+          }
+          ctx.status = 403;
+          alaska.error('Access Denied', 403);
+        };
         await next();
       });
     });
@@ -124,14 +131,14 @@ export default class UserService extends alaska.Service {
    */
   async registerAbility(data) {
     let id = data._id || data.id;
-    let abilities = await this.getAbilities();
-    if (_.find(abilities, ability => ability._id == id)) {
+    let Ability = this.model('Ability');
+    let ability = await Ability.getCache(id);
+    if (ability) {
       //权限已经存在
       return false;
     }
     console.log(`Register ability : ${id}`);
-    let Ability = this.model('Ability');
-    let ability = new Ability(data);
+    ability = new Ability(data);
     ability._id = id;
     await ability.save();
     return ability;
