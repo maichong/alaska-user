@@ -14,10 +14,9 @@ import Role from './Role';
 export default class User extends service.Model {
 
   static label = '用户';
-
   static title = 'username';
-
   static defaultColumns = 'username,email,createdAt';
+  static noremove = true;
 
   static fields = {
     username: {
@@ -47,7 +46,7 @@ export default class User extends service.Model {
       private: true
     },
     abilities: {
-      label: '能力',
+      label: '权限',
       type: [Ability],
       many: true,
       private: true
