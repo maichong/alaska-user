@@ -29,7 +29,7 @@ export default class Role extends service.Model {
     abilities: {
       label: '权限',
       type: [Ability],
-      many: true
+      multi: true
     },
     sort: {
       label: '排序',

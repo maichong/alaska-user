@@ -42,13 +42,13 @@ export default class User extends service.Model {
     roles: {
       label: '角色',
       type: [Role],
-      many: true,
+      multi: true,
       private: true
     },
     abilities: {
       label: '权限',
       type: [Ability],
-      many: true,
+      multi: true,
       private: true
     },
     createdAt: {
