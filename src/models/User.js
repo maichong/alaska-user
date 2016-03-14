@@ -22,22 +22,26 @@ export default class User extends service.Model {
     username: {
       label: '用户名',
       type: String,
-      sort: 2,
       index: true,
-      default: 1
+      required: true
     },
     email: {
       label: 'Email',
       type: String,
-      index: true,
-      sort: 1
+      index: true
     },
     password: {
       label: '密码',
       type: 'password',
-      sort: 2,
       default: 1,
       private: true
+    },
+    avatar: {
+      label: '头像',
+      type: 'image',
+      default: {
+        ext: 'jpg'
+      }
     },
     roles: {
       label: '角色',
