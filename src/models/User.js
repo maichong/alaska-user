@@ -38,10 +38,7 @@ export default class User extends service.Model {
     },
     avatar: {
       label: '头像',
-      type: 'image',
-      default: {
-        ext: 'jpg'
-      }
+      type: 'image'
     },
     roles: {
       label: '角色',
