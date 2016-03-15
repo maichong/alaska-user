@@ -70,7 +70,8 @@ export default class UserService extends alaska.Service {
     if (!user) {
       alaska.error('Account not found', 1);
     }
-    if (!user.auth(password)) {
+    let success = await user.auth(password);
+    if (!success) {
       alaska.error('Password is not matched', 2);
     }
 

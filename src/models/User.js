@@ -6,7 +6,6 @@
 
 const service = __service;
 import _ from 'lodash';
-import md5 from 'md5';
 
 import Ability from './Ability';
 import Role from './Role';
@@ -65,12 +64,12 @@ export default class User extends service.Model {
   }
 
   /**
-   * 验证密码
-   * @param password
+   * [async] 验证密码
+   * @param candidate 待检测密码
    * @returns {boolean}
    */
-  auth(password) {
-    return this.password === md5(password);
+  auth(candidate) {
+    return this._.password.compare(candidate);
   }
 
   /**

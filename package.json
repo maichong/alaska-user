@@ -36,6 +36,5 @@
   },
   "homepage": "https://github.com/maichong/alaska-user#readme",
   "dependencies": {
-    "md5": "^2.0.0"
   }
 }
