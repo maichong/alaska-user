@@ -1,6 +1,6 @@
 {
   "name": "alaska-user",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Alaska user service",
   "main": "lib/alaska-user.js",
   "devDependencies": {
@@ -13,7 +13,7 @@
     "rimraf": "*"
   },
   "peerDependencies": {
-    "alaska": "^0.0.4"
+    "alaska": "^0.2.0"
   },
   "scripts": {
     "watch": "babel ./src --out-dir ./lib -w",
@@ -36,5 +36,11 @@
   },
   "homepage": "https://github.com/maichong/alaska-user#readme",
   "dependencies": {
+    "alaska-field-datetime": "^0.2.0",
+    "alaska-field-image": "^0.1.0",
+    "alaska-field-number": "^0.2.0",
+    "alaska-field-password": "^0.2.0",
+    "alaska-field-relationship": "^0.2.0",
+    "alaska-field-text": "^0.2.0"
   }
 }

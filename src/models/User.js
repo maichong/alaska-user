@@ -14,7 +14,7 @@ export default class User extends service.Model {
 
   static label = '用户';
   static title = 'username';
-  static defaultColumns = 'avatar,username,email,roles,createdAt';
+  static defaultColumns = 'avatar,username,email,createdAt';
   static noremove = true;
 
   static fields = {
