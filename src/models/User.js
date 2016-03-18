@@ -14,7 +14,7 @@ export default class User extends service.Model {
 
   static label = '用户';
   static title = 'username';
-  static defaultColumns = 'username,email,createdAt';
+  static defaultColumns = 'avatar,username,email,roles,createdAt';
   static noremove = true;
 
   static fields = {
@@ -73,7 +73,7 @@ export default class User extends service.Model {
   }
 
   /**
-   * 判断用户是否有指定权限
+   * [async] 判断用户是否有指定权限
    * @param id
    * @returns {boolean}
    */
@@ -101,7 +101,7 @@ export default class User extends service.Model {
       for (let rid of this.roles) {
         let role = rid;
         if (!role.hasAbility) {
-          role = await Role.getCache(rid);
+          role = await Role.findCache(rid);
         }
         if (await role.hasAbility(id)) {
           return true;

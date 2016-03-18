@@ -26,14 +26,13 @@ export default class UserService extends alaska.Service {
     let service = this;
     let alaska = this.alaska;
     //在App载入session中间件后/载入其他中间件之前
-    alaska.mainService().pre('loadAppMiddlewares', function () {
-      let app = alaska.app();
+    alaska.main.pre('loadAppMiddlewares', function () {
       //用户信息中间件
-      app.use(async function (ctx, next) {
+      alaska.app.use(async function (ctx, next) {
         let userId = ctx.session.userId;
         if (userId) {
           let Model = service.model('User');
-          ctx.user = await Model.getCache(userId);
+          ctx.user = await Model.findCache(userId);
         }
         ctx.checkAbility = async function (id) {
           if (ctx.user && await ctx.user.hasAbility(id)) {
@@ -48,7 +47,7 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 新建用户
+   * [async] 新建用户
    * @param data
    */
   async create(data) {
@@ -58,7 +57,7 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 登录,若登录失败,则抛出异常
+   * [async] 登录,若登录失败,则抛出异常
    * @param ctx koa请求上下文
    * @param username 用户名
    * @param password 密码
@@ -80,7 +79,7 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 注销登录
+   * [async] 注销登录
    * @param ctx
    */
   async logout(ctx) {
@@ -88,12 +87,12 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 获取所有能力列表
+   * [async] 获取所有权限列表
    * @returns {Ability[]}
    */
-  async getAbilities() {
+  async abilities() {
     let Ability = this.model('Ability');
-    let cache = this.cache();
+    let cache = this.cache;
     let data = await cache.get('abilities_list');
     if (data) {
       return Ability.castCacheArray(data);
@@ -107,12 +106,12 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 获取角色列表
+   * [async] 获取角色列表
    * @returns {Role[]}
    */
-  async getRoles() {
+  async roles() {
     let Role = this.model('Role');
-    let cache = this.cache();
+    let cache = this.cache;
     let data = await cache.get('roles_list');
     if (data) {
       return Role.castCacheArray(data);
@@ -126,14 +125,14 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 注册能力,如果已经存在则返回false
+   * [async] 注册权限,如果已经存在则返回false
    * @param data
    * @returns {boolean|Ability}
    */
   async registerAbility(data) {
     let id = data._id || data.id;
     let Ability = this.model('Ability');
-    let ability = await Ability.getCache(id);
+    let ability = await Ability.findCache(id);
     if (ability) {
       //权限已经存在
       return false;
@@ -146,14 +145,14 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 注册角色,如果已经存在则返回false
+   * [async] 注册角色,如果已经存在则返回false
    * @param data
-   *        data.abilities 角色默认能力名称列表,不是id列表
+   *        data.abilities 角色默认权限id列表
    * @returns {boolean|Role}
    */
   async registerRole(data) {
     let id = data._id || data.id;
-    let roles = await this.getRoles();
+    let roles = await this.roles();
     if (_.find(roles, role => role._id == id)) {
       //角色已经存在
       return false;
@@ -162,7 +161,7 @@ export default class UserService extends alaska.Service {
     let Role = this.model('Role');
     let abilities = [];
     let abilitiesMap = {};
-    let allAbilities = await this.getAbilities();
+    let allAbilities = await this.abilities();
     allAbilities.forEach(a => {
       abilitiesMap[a._id] = a._id;
     });
@@ -182,11 +181,12 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * 清空本模块缓存
+   * [async] 清空本模块缓存
    */
   async clearCache() {
-    await this.cache().del('abilities_list');
-    await this.cache().del('roles_list');
+    let cache = this.cache;
+    await cache.del('abilities_list');
+    await cache.del('roles_list');
   }
 
 }
