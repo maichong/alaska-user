@@ -15,13 +15,16 @@ export default class User extends service.Model {
   static label = '用户';
   static title = 'username';
   static defaultColumns = 'avatar,username,email,createdAt';
+  static searchFields = 'username,email';
   static noremove = true;
 
   static fields = {
     username: {
       label: '用户名',
       type: String,
-      index: true,
+      index: {
+        unique: true
+      },
       required: true
     },
     email: {

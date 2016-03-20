@@ -16,6 +16,8 @@ export default class Role extends service.Model {
 
   static defaultColumns = '_id,title,service,sort,createdAt';
 
+  static searchFields = 'title';
+
   static fields = {
     _id: String,
     title: {

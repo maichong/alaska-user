@@ -12,6 +12,8 @@ export default class Ability extends service.Model {
 
   static defaultColumns = '_id,title,service,createdAt';
 
+  static searchFields = 'title';
+
   static fields = {
     _id: String,
     title: {
