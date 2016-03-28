@@ -1,6 +1,6 @@
 {
   "name": "alaska-user",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Alaska user service",
   "main": "lib/alaska-user.js",
   "devDependencies": {

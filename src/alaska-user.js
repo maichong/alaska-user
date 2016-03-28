@@ -18,8 +18,8 @@ export default class UserService extends alaska.Service {
     options.id = 'alaska-user';
     options.dir = __dirname;
     super(options, alaska);
-    collie(this, 'create');
     collie(this, 'login');
+    collie(this, 'logout');
   }
 
   postInit() {
@@ -47,13 +47,12 @@ export default class UserService extends alaska.Service {
   }
 
   /**
-   * [async] 新建用户
-   * @param data
+   * [async] 注册
+   * @param {object} data
+   * @returns {User}
    */
-  async create(data) {
-    let User = this.model('User');
-    let user = new User(data);
-    await user.save();
+  register(data) {
+    return this.run('Register', data);
   }
 
   /**
@@ -64,16 +63,7 @@ export default class UserService extends alaska.Service {
    * @returns {User}
    */
   async login(ctx, username, password) {
-    let User = this.model('User');
-    let user = await User.findOne({ username });
-    if (!user) {
-      alaska.error('Account not found', 1);
-    }
-    let success = await user.auth(password);
-    if (!success) {
-      alaska.error('Password is not matched', 2);
-    }
-
+    let user = await this.run('Login', { username, password });
     ctx.session.userId = user.id;
     return user;
   }
@@ -122,62 +112,6 @@ export default class UserService extends alaska.Service {
       await cache.set('abilities_list', Role.castModelArray(data), 600);
     }
     return data;
-  }
-
-  /**
-   * [async] 注册权限,如果已经存在则返回false
-   * @param data
-   * @returns {boolean|Ability}
-   */
-  async registerAbility(data) {
-    let id = data._id || data.id;
-    let Ability = this.model('Ability');
-    let ability = await Ability.findCache(id);
-    if (ability) {
-      //权限已经存在
-      return false;
-    }
-    console.log(`Register ability : ${id}`);
-    ability = new Ability(data);
-    ability._id = id;
-    await ability.save();
-    return ability;
-  }
-
-  /**
-   * [async] 注册角色,如果已经存在则返回false
-   * @param data
-   *        data.abilities 角色默认权限id列表
-   * @returns {boolean|Role}
-   */
-  async registerRole(data) {
-    let id = data._id || data.id;
-    let roles = await this.roles();
-    if (_.find(roles, role => role._id == id)) {
-      //角色已经存在
-      return false;
-    }
-    console.log(`Register role : ${id}`);
-    let Role = this.model('Role');
-    let abilities = [];
-    let abilitiesMap = {};
-    let allAbilities = await this.abilities();
-    allAbilities.forEach(a => {
-      abilitiesMap[a._id] = a._id;
-    });
-    if (data.abilities) {
-      for (let abilityId of data.abilities) {
-        if (!abilitiesMap[abilityId]) {
-          throw new Error(`Ability ${abilityId} not found when register role ${data.id}`);
-        }
-        abilities.push(abilityId);
-      }
-    }
-    data.abilities = abilities;
-    let role = new Role(data);
-    role._id = id;
-    await role.save();
-    return role;
   }
 
   /**
