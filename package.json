@@ -1,6 +1,6 @@
 {
   "name": "alaska-user",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Alaska user service",
   "main": "lib/alaska-user.js",
   "devDependencies": {
@@ -11,9 +11,6 @@
     "babel-plugin-transform-es2015-parameters": "^6.4.2",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
     "rimraf": "*"
-  },
-  "peerDependencies": {
-    "alaska": "^0.2.0"
   },
   "scripts": {
     "watch": "babel ./src --out-dir ./lib -w",
@@ -35,12 +32,15 @@
     "url": "https://github.com/maichong/alaska-user/issues"
   },
   "homepage": "https://github.com/maichong/alaska-user#readme",
+  "peerDependencies": {
+    "alaska": "^0.5.1"
+  },
   "dependencies": {
-    "alaska-field-datetime": "^0.2.0",
-    "alaska-field-image": "^0.1.0",
-    "alaska-field-number": "^0.2.0",
-    "alaska-field-password": "^0.2.0",
-    "alaska-field-relationship": "^0.2.0",
-    "alaska-field-text": "^0.2.0"
+    "alaska-field-datetime": "^0.4.2",
+    "alaska-field-image": "^0.4.1",
+    "alaska-field-number": "^0.4.1",
+    "alaska-field-password": "^0.4.1",
+    "alaska-field-relationship": "^0.4.1",
+    "alaska-field-text": "^0.4.2"
   }
 }
