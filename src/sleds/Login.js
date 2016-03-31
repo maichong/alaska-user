@@ -4,20 +4,27 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
-export default class Login extends __service.Sled {
-  async exec() {
-    const service = this.service;
+/**
+ * 登录
+ */
+export default class Login extends service.Sled {
+  /**
+   * 登录失败将抛出异常
+   * @param {Object} data
+   *                 data.ctx
+   *                 data.username
+   *                 data.password
+   * @returns {User}
+   */
+  async exec(data) {
     const User = service.model('User');
-    const data = this.data;
     let user = await User.findOne({ username: data.username });
     if (!user) {
-      service.error('Account not found', 1);
+      service.error(service.t('Account is not exists', data.ctx.locale), 1);
     }
     let success = await user.auth(data.password);
     if (!success) {
-      service.error('Password is not matched', 2);
+      service.error(service.t('Password is not matched', data.ctx.locale), 2);
     }
     return user;
   }

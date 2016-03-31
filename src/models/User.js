@@ -4,15 +4,12 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
-const service = __service;
-import _ from 'lodash';
-
 import Ability from './Ability';
 import Role from './Role';
 
 export default class User extends service.Model {
 
-  static label = '用户';
+  static label = 'User';
   static title = 'username';
   static defaultColumns = 'avatar,username,email,roles,createdAt';
   static searchFields = 'username,email';
@@ -20,7 +17,7 @@ export default class User extends service.Model {
 
   static fields = {
     username: {
-      label: '用户名',
+      label: 'Username',
       type: String,
       index: {
         unique: true
@@ -33,29 +30,29 @@ export default class User extends service.Model {
       index: true
     },
     password: {
-      label: '密码',
+      label: 'Password',
       type: 'password',
       default: 1,
       private: true
     },
     avatar: {
-      label: '头像',
+      label: 'Avatar',
       type: 'image'
     },
     roles: {
-      label: '角色',
+      label: 'Roles',
       type: [Role],
       multi: true,
       private: true
     },
     abilities: {
-      label: '权限',
+      label: 'Abilities',
       type: [Ability],
       multi: true,
       private: true
     },
     createdAt: {
-      label: '注册时间',
+      label: 'Registered At',
       type: Date
     }
   };

@@ -3,8 +3,9 @@
   "env": {
     "node": true
   },
-  "globals": {
-    "__service" : true
+  "globals":{
+    "alaska": true,
+    "service": true
   },
   "parser": "babel-eslint",
   "rules": {

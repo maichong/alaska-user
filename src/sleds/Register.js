@@ -4,15 +4,20 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
 /**
  * 用户注册
  */
-export default class Register extends __service.Sled {
-  async exec() {
-    const User = this.model('User');
-    let user = new User(this.data);
+export default class Register extends service.Sled {
+  /**
+   * @param {Object} data
+   *                 data.username
+   *                 data.password
+   *                 ...
+   * @returns {User}
+   */
+  async exec(data) {
+    const User = service.model('User');
+    let user = new User(data);
     await user.save();
     return user;
   }

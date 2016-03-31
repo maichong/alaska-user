@@ -4,41 +4,35 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
-const service = __service;
-
 import Ability from './Ability';
 
 export default class Role extends service.Model {
 
-  static label = '角色';
+  static label = 'Role';
 
   static defaultSort = '-sort';
 
-  static defaultColumns = '_id,title,service,sort,createdAt';
+  static defaultColumns = '_id,title,sort,createdAt';
 
   static searchFields = 'title';
 
   static fields = {
     _id: String,
     title: {
-      label: '标题',
-      type: String
-    },
-    service: {
-      label: '所属模块',
+      label: 'Title',
       type: String
     },
     abilities: {
-      label: '权限',
+      label: 'Abilities',
       type: [Ability],
       multi: true
     },
     sort: {
-      label: '排序',
+      label: 'Sort',
       type: Number
     },
     createdAt: {
-      label: '创建时间',
+      label: 'Created At',
       type: Date
     }
   };

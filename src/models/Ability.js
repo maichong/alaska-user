@@ -4,11 +4,9 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
-const service = __service;
-
 export default class Ability extends service.Model {
 
-  static label = '权限';
+  static label = 'Ability';
 
   static defaultColumns = '_id,title,service,createdAt';
 
@@ -17,15 +15,15 @@ export default class Ability extends service.Model {
   static fields = {
     _id: String,
     title: {
-      label: '标题',
+      label: 'Title',
       type: String
     },
     service: {
-      label: '所属模块',
+      label: 'Service',
       type: String
     },
     createdAt: {
-      label: '创建时间',
+      label: 'Created At',
       type: Date
     }
   };

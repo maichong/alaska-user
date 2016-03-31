@@ -4,20 +4,21 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
-const _ = require('lodash');
+import _ from 'lodash';
 
 /**
  * 注册角色
- * @param data
- *        data.abilities 角色默认权限id列表
  */
-export default class RegisterRole extends __service.Sled {
-
-  async exec() {
-    const service = this.service;
-    const data = this.data;
+export default class RegisterRole extends service.Sled {
+  /**
+   * @param data
+   *        data.id
+   *        data.title
+   *        data.sort
+   *        data.abilities 角色默认权限id列表
+   * @returns {Role}
+   */
+  async exec(data) {
     let id = data._id || data.id;
     let roles = await service.roles();
     let role = _.find(roles, r => r._id == id)

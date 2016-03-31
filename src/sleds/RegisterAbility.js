@@ -4,16 +4,20 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
 /**
  * 注册权限
  */
-export default class RegisterAbility extends __service.Sled {
-
-  async exec() {
-    const Ability = this.model('Ability');
-    const data = this.data;
+export default class RegisterAbility extends service.Sled {
+  /**
+   * @param data
+   *        data.id
+   *        data.title
+   *        data.sort
+   *        data.service
+   * @returns {Ability}
+   */
+  async exec(data) {
+    const Ability = service.model('Ability');
 
     let id = data._id || data.id;
     let ability = await Ability.findCache(id);

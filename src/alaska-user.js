@@ -6,7 +6,6 @@
 
 import alaska from 'alaska';
 import collie from 'collie';
-import * as _ from 'lodash';
 
 /**
  * @class UserService
@@ -26,15 +25,15 @@ export default class UserService extends alaska.Service {
     let service = this;
     let alaska = this.alaska;
     //在App载入session中间件后/载入其他中间件之前
-    alaska.main.pre('loadAppMiddlewares', function () {
+    alaska.main.pre('loadAppMiddlewares', () => {
       //用户信息中间件
-      alaska.app.use(async function (ctx, next) {
+      alaska.app.use(async (ctx, next) => {
         let userId = ctx.session.userId;
         if (userId) {
           let Model = service.model('User');
           ctx.user = await Model.findCache(userId);
         }
-        ctx.checkAbility = async function (id) {
+        ctx.checkAbility = async (id) => {
           if (ctx.user && await ctx.user.hasAbility(id)) {
             return true;
           }
@@ -48,7 +47,7 @@ export default class UserService extends alaska.Service {
 
   /**
    * [async] 注册
-   * @param {object} data
+   * @param {Object} data
    * @returns {User}
    */
   register(data) {
@@ -63,7 +62,7 @@ export default class UserService extends alaska.Service {
    * @returns {User}
    */
   async login(ctx, username, password) {
-    let user = await this.run('Login', { username, password });
+    let user = await this.run('Login', { ctx, username, password });
     ctx.session.userId = user.id;
     return user;
   }
