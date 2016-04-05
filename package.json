@@ -1,6 +1,6 @@
 {
   "name": "alaska-user",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Alaska user service",
   "main": "lib/alaska-user.js",
   "devDependencies": {
@@ -41,6 +41,6 @@
     "alaska-field-number": "^0.4.1",
     "alaska-field-password": "^0.6.0",
     "alaska-field-relationship": "^0.6.0",
-    "alaska-field-text": "^0.4.2"
+    "alaska-field-text": "^0.6.0"
   }
 }
