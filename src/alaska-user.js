@@ -22,26 +22,16 @@ export default class UserService extends alaska.Service {
   }
 
   postInit() {
-    let service = this;
-    let alaska = this.alaska;
-    //在App载入session中间件后/载入其他中间件之前
-    alaska.main.pre('loadAppMiddlewares', () => {
-      //用户信息中间件
-      alaska.app.use(async (ctx, next) => {
-        let userId = ctx.session.userId;
-        if (userId) {
-          let Model = service.model('User');
-          ctx.user = await Model.findCache(userId);
-        }
-        ctx.checkAbility = async (id) => {
-          if (ctx.user && await ctx.user.hasAbility(id)) {
-            return true;
-          }
-          ctx.status = 403;
-          alaska.error('Access Denied', 403);
-        };
-        await next();
-      });
+    const MAIN = this.alaska.main;
+    MAIN.applyConfig({
+      '+appMiddlewares': [{
+        id: 'alaska-session',
+        sort: 800,
+        options: MAIN.config('session')
+      }, {
+        id: __dirname + '/middlewares/user.js',
+        sort: 700
+      }]
     });
   }
 

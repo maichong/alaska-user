@@ -6,9 +6,6 @@
 
 export default {
   prefix: '/user',
-  /**
-   * [UserService] 超级管理员,默认的用户拥有所有权限
-   * @type {string}
-   */
-  superUser: ''
+  middlewares: false,
+  controllers: false
 };
