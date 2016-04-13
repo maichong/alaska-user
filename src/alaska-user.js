@@ -17,8 +17,6 @@ export default class UserService extends alaska.Service {
     options.id = 'alaska-user';
     options.dir = __dirname;
     super(options, alaska);
-    collie(this, 'login');
-    collie(this, 'logout');
   }
 
   postInit() {
@@ -33,36 +31,6 @@ export default class UserService extends alaska.Service {
         sort: 700
       }]
     });
-  }
-
-  /**
-   * [async] 注册
-   * @param {Object} data
-   * @returns {User}
-   */
-  register(data) {
-    return this.run('Register', data);
-  }
-
-  /**
-   * [async] 登录,若登录失败,则抛出异常
-   * @param ctx koa请求上下文
-   * @param username 用户名
-   * @param password 密码
-   * @returns {User}
-   */
-  async login(ctx, username, password) {
-    let user = await this.run('Login', { ctx, username, password });
-    ctx.session.userId = user.id;
-    return user;
-  }
-
-  /**
-   * [async] 注销登录
-   * @param ctx
-   */
-  async logout(ctx) {
-    delete ctx.session.userId;
   }
 
   /**

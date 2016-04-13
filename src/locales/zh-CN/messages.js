@@ -13,6 +13,9 @@ export default {
   Avatar: '头像',
   Username: '用户名',
   Password: '密码',
-  'Account is not exists': '账号不存在',
-  'Registered At': '注册时间'
+  'Incorrect username or password': '账号或密码错误',
+  'Registered At': '注册时间',
+  'Username is required': '请输入用户名',
+  'Password is required': '请输入密码',
+  'New password is required': '请输入新密码'
 };

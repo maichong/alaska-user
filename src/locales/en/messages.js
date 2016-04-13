@@ -13,6 +13,9 @@ export default {
   Avatar: 'Avatar',
   Username: 'Username',
   Password: 'Password',
-  'Account is not exists': 'Account is not exists',
-  'Registered At': 'Registered At'
+  'Incorrect username or password': 'Incorrect username or password',
+  'Registered At': 'Registered At',
+  'Username is required': 'Username is required',
+  'Password is required': 'Password is required',
+  'New password is required': 'New password is required'
 };
