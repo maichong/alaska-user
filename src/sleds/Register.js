@@ -12,6 +12,7 @@ const User = service.model('User');
 export default class Register extends service.Sled {
   /**
    * @param {Object} data
+   *                 [data.ctx]
    *                 [data.user]
    *                 data.username
    *                 data.password
