@@ -11,9 +11,15 @@ export default class User extends service.Model {
 
   static label = 'User';
   static title = 'username';
-  static defaultColumns = 'avatar,username,email,roles,createdAt';
-  static searchFields = 'username,email';
+  static defaultColumns = 'avatar username email roles createdAt';
+  static searchFields = 'username email';
+  static defaultSort = '-createdAt';
   static noremove = true;
+
+  static scopes = {
+    tiny: 'displayName avatar _username',
+    info: '*'
+  };
 
   static fields = {
     username: {
@@ -54,6 +60,12 @@ export default class User extends service.Model {
     createdAt: {
       label: 'Registered At',
       type: Date
+    }
+  };
+
+  static virtuals = {
+    get displayName() {
+      return this.username;
     }
   };
 

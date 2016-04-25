@@ -23,7 +23,7 @@ export default class UserService extends alaska.Service {
     const MAIN = this.alaska.main;
     MAIN.applyConfig({
       '+appMiddlewares': [{
-        id: 'alaska-session',
+        id: 'alaska-middleware-session',
         sort: 800,
         options: MAIN.config('session')
       }, {

@@ -9,7 +9,7 @@ export default async function (ctx) {
   if (!ctx.user) {
     service.error(403);
   }
-  ctx.body = ctx.user.data();
+  ctx.body = ctx.user.data('info');
 }
 
 //修改密码

@@ -5,6 +5,6 @@
  */
 
 export default async function (ctx) {
-  service.run('Logout', { ctx });
+  await service.run('Logout', { ctx });
   ctx.body = {};
 }

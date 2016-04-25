@@ -20,5 +20,5 @@ export default async function (ctx) {
   }
 
   let user = await service.run('Login', { username, password });
-  ctx.body = user.data();
+  ctx.body = user.data('info');
 }

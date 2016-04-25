@@ -8,12 +8,15 @@ export default class Ability extends service.Model {
 
   static label = 'Ability';
 
-  static defaultColumns = '_id,title,service,createdAt';
+  static defaultColumns = '_id title service createdAt';
 
   static searchFields = 'title';
 
   static fields = {
-    _id: String,
+    _id: {
+      type: String,
+      required: true
+    },
     title: {
       label: 'Title',
       type: String

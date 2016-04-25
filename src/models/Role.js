@@ -12,12 +12,15 @@ export default class Role extends service.Model {
 
   static defaultSort = '-sort';
 
-  static defaultColumns = '_id,title,sort,createdAt';
+  static defaultColumns = '_id title sort createdAt';
 
   static searchFields = 'title';
 
   static fields = {
-    _id: String,
+    _id: {
+      type: String,
+      required: true
+    },
     title: {
       label: 'Title',
       type: String
