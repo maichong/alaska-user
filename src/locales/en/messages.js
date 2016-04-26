@@ -17,5 +17,6 @@ export default {
   'Registered At': 'Registered At',
   'Username is required': 'Username is required',
   'Password is required': 'Password is required',
-  'New password is required': 'New password is required'
+  'New password is required': 'New password is required',
+  'Username is exists': 'Username is exists'
 };

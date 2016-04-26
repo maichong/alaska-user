@@ -1,7 +1,11 @@
 {
   "name": "alaska-user",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Alaska user service",
+  "keywords": [
+    "alaska",
+    "alaska-service"
+  ],
   "main": "lib/alaska-user.js",
   "scripts": {
     "watch": "babel ./src --out-dir ./lib -w",

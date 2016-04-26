@@ -4,6 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
+import Ability from '../models/Ability';
+
 /**
  * 注册权限
  */
@@ -17,20 +19,16 @@ export default class RegisterAbility extends service.Sled {
    * @returns {Ability}
    */
   async exec(data) {
-    const Ability = service.model('Ability');
-
     let id = data._id || data.id;
     let ability = await Ability.findCache(id);
     if (ability) {
       //权限已经存在
       return ability;
     }
-
     console.log(`Register ability : ${id}`);
     ability = new Ability(data);
     ability._id = id;
     await ability.save();
     return ability;
   }
-
 }

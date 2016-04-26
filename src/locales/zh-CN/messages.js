@@ -17,5 +17,6 @@ export default {
   'Registered At': '注册时间',
   'Username is required': '请输入用户名',
   'Password is required': '请输入密码',
-  'New password is required': '请输入新密码'
+  'New password is required': '请输入新密码',
+  'Username is exists': '用户名已经存在'
 };

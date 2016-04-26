@@ -4,6 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
+import _ from 'lodash';
 const User = service.model('User');
 
 /**
@@ -22,7 +23,12 @@ export default class Register extends service.Sled {
   async exec(data) {
     let user = data.user;
     if (!user) {
-      user = new User(data);
+      let username = data.username;
+      let count = await User.count({ username });
+      if (count) {
+        service.error('Username is exists');
+      }
+      user = new User(_.omit(data, 'ctx', 'user'));
     }
     await user.save();
     return user;
