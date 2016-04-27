@@ -19,6 +19,6 @@ export default async function (ctx) {
     service.error('Password is required');
   }
 
-  let user = await service.run('Login', { username, password });
+  let user = await service.run('Login', { ctx, username, password });
   ctx.body = user.data('info');
 }

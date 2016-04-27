@@ -31,6 +31,10 @@ export default class Register extends service.Sled {
       user = new User(_.omit(data, 'ctx', 'user'));
     }
     await user.save();
+
+    if (data.ctx) {
+      data.ctx.session.userId = user.id;
+    }
     return user;
   }
 }
