@@ -7,6 +7,8 @@
 import _ from 'lodash';
 const User = service.model('User');
 
+const SETTINGS = service.service('settings');
+
 /**
  * 用户注册
  */
@@ -21,6 +23,11 @@ export default class Register extends service.Sled {
    * @returns {User}
    */
   async exec(data) {
+    let closeRegister = await SETTINGS.get('user.closeRegister');
+    if (closeRegister) {
+      let closeRegisterReason = await SETTINGS.get('user.closeRegisterReason');
+      service.error(closeRegisterReason || 'Register closed');
+    }
     let user = data.user;
     if (!user) {
       let username = data.username;

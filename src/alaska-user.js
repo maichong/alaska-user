@@ -14,8 +14,8 @@ import collie from 'collie';
 export default class UserService extends alaska.Service {
   constructor(options, alaska) {
     options = options || {};
-    options.id = 'alaska-user';
-    options.dir = __dirname;
+    options.dir = options.dir || __dirname;
+    options.id = options.id || 'alaska-user';
     super(options, alaska);
   }
 
