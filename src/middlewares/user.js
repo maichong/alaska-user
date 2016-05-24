@@ -1,11 +1,8 @@
 /**
- * user.js
  * @copyright Maichong Software Ltd. 2016 http://maichong.it
  * @date 2016-04-06
  * @author Liang <liang@maichong.it>
  */
-
-'use strict';
 
 module.exports = function () {
   return function userMiddleware(ctx, next) {
@@ -23,7 +20,7 @@ module.exports = function () {
           return true;
         }
         ctx.status = 403;
-        return Promise.reject(new alaska.PanicError('Access Denied', 403));
+        return Promise.reject(new alaska.NormalError('Access Denied', 403));
       });
     };
     if (userId) {
