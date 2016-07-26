@@ -8,7 +8,7 @@ export default {
   prefix: '/user',
   middlewares: false,
   controllers: false,
-  services: [
-    { id: 'alaska-settings', alias: 'settings' }
-  ]
+  services: {
+    'alaska-settings': {}
+  }
 };

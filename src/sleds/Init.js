@@ -4,9 +4,10 @@
  * @author Liang <liang@maichong.it>
  */
 
-const SETTINGS = service.service('settings');
+import alaska from 'alaska';
+import SETTINGS from 'alaska-settings';
 
-export default class Init extends service.Sled {
+export default class Init extends alaska.Sled {
   async exec() {
     SETTINGS.register({
       id: 'user.closeRegister',

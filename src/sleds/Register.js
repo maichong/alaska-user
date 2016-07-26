@@ -5,14 +5,15 @@
  */
 
 import _ from 'lodash';
-const User = service.model('User');
-
-const SETTINGS = service.service('settings');
+import alaska from 'alaska';
+import service from '../';
+import User from '../models/User';
+import SETTINGS from 'alaska-settings';
 
 /**
  * 用户注册
  */
-export default class Register extends service.Sled {
+export default class Register extends alaska.Sled {
   /**
    * @param {Object} data
    *                 [data.ctx]

@@ -11,21 +11,20 @@ import collie from 'collie';
  * @class UserService
  * @event UserService#create-user
  */
-export default class UserService extends alaska.Service {
-  constructor(options, alaska) {
+class UserService extends alaska.Service {
+  constructor(options) {
     options = options || {};
     options.dir = options.dir || __dirname;
     options.id = options.id || 'alaska-user';
-    super(options, alaska);
+    super(options);
   }
 
   postInit() {
-    const MAIN = this.alaska.main;
-    MAIN.applyConfig({
+    alaska.main.applyConfig({
       '+appMiddlewares': [{
         id: 'alaska-middleware-session',
         sort: 800,
-        options: MAIN.config('session')
+        options: alaska.main.config('session')
       }, {
         id: __dirname + '/middlewares/user.js',
         sort: 700
@@ -82,3 +81,4 @@ export default class UserService extends alaska.Service {
 
 }
 
+export default new UserService();

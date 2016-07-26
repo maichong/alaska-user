@@ -5,12 +5,13 @@
  */
 
 import _ from 'lodash';
+import alaska from 'alaska';
 import Role from '../models/Role';
 
 /**
  * 注册角色
  */
-export default class RegisterRole extends service.Sled {
+export default class RegisterRole extends alaska.Sled {
   /**
    * @param data
    *        data.id
@@ -21,7 +22,7 @@ export default class RegisterRole extends service.Sled {
    */
   async exec(data) {
     let id = data._id || data.id;
-    let roles = await service.roles();
+    let roles = await this.service.roles();
     let role = _.find(roles, r => r._id == id);
     if (role) {
       //角色已经存在

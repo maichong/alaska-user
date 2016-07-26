@@ -4,10 +4,13 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
-export default class Ability extends service.Model {
+import alaska from 'alaska';
+import service from '../';
+
+export default class Ability extends alaska.Model {
 
   static label = 'Ability';
-
+  static icon = 'unlock-alt';
   static defaultColumns = '_id title service createdAt';
 
   static searchFields = 'title';

@@ -4,12 +4,13 @@
  * @author Liang <liang@maichong.it>
  */
 
+import alaska from 'alaska';
 import Ability from '../models/Ability';
 
 /**
  * 注册权限
  */
-export default class RegisterAbility extends service.Sled {
+export default class RegisterAbility extends alaska.Sled {
   /**
    * @param data
    *        data.id

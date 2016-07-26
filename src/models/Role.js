@@ -4,12 +4,14 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
+import alaska from 'alaska';
+import service from '../';
 import Ability from './Ability';
 
-export default class Role extends service.Model {
+export default class Role extends alaska.Model {
 
   static label = 'Role';
-
+  static icon = 'users';
   static defaultSort = '-sort';
 
   static defaultColumns = '_id title sort createdAt';

@@ -4,12 +4,14 @@
  * @author LuLu <LuLu@maichong.it>
  */
 
+import alaska from 'alaska';
 import Ability from './Ability';
 import Role from './Role';
 
-export default class User extends service.Model {
+export default class User extends alaska.Model {
 
   static label = 'User';
+  static icon = 'user';
   static title = 'username';
   static defaultColumns = 'avatar username email roles createdAt';
   static searchFields = 'username email';
@@ -90,7 +92,7 @@ export default class User extends service.Model {
    * @returns {boolean}
    */
   async hasAbility(id) {
-    let superUser = service.alaska.config(true, 'superUser');
+    let superUser = alaska.config('superUser');
     if (superUser && this.id === superUser) {
       return true;
     }

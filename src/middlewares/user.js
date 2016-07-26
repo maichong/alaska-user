@@ -4,10 +4,20 @@
  * @author Liang <liang@maichong.it>
  */
 
+import alaska from 'alaska';
+import User from '../models/User';
+import Encryption from '../lib/encryption';
+
 module.exports = function () {
-  return function userMiddleware(ctx, next) {
+  let key = alaska.main.config('autoLogin.key');
+  let secret = alaska.main.config('autoLogin.secret');
+  let encryption;
+  if (key && secret) {
+    encryption = new Encryption(secret);
+  }
+
+  return async function userMiddleware(ctx, next) {
     let userId = ctx.session.userId;
-    const alaska = ctx.alaska;
     ctx.user = null;
 
     ctx.checkAbility = (id) => {
@@ -24,12 +34,42 @@ module.exports = function () {
       });
     };
     if (userId) {
-      let User = alaska.service('alaska-user').model('User');
-      return User.findCache(userId).then(user => {
-        ctx.user = user;
-        return next();
-      });
+      try {
+        ctx.user = await User.findCache(userId);
+      } catch (e) {
+        console.error(e.stack)
+      }
     }
-    return next();
+
+    if (!ctx.user && encryption) {
+      let cookie = ctx.cookies.get(key);
+      if (cookie) {
+        try {
+          let data = encryption.decrypt(new Buffer(cookie, 'base64')).toString();
+          if (data) {
+            data = data.split(':').filter(d => d);
+            if (data.length >= 2) {
+              let user = await User.findCache(data[0]);
+              if (!user) {
+                throw new Error('user not found');
+              }
+              if (data[1] == encryption.hash(user.password)) {
+                //ok
+                ctx.user = user;
+                ctx.session.userId = user.id;
+              } else {
+                ctx.cookies.set(key)
+              }
+            }
+          } else {
+            ctx.cookies.set(key)
+          }
+        } catch (error) {
+          console.error(error.stack);
+          ctx.cookies.set(key)
+        }
+      }
+    }
+    await next();
   };
 };
