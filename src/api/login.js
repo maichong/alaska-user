@@ -4,6 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
+import service from '../';
+
 export default async function (ctx) {
   if (ctx.method !== 'POST') {
     service.error(400);

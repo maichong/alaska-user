@@ -4,6 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
+import service from '../';
+
 //用户信息
 export default async function (ctx) {
   if (!ctx.user) {
