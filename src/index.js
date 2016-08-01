@@ -46,7 +46,7 @@ class UserService extends alaska.Service {
     data = await Ability.find().sort('-sort');
     if (data.length) {
       //缓存10分钟
-      await cache.set('abilities_list', Ability.castModelArray(data), 600);
+      await cache.set('abilities_list', Ability.castModelArray(data), 600 * 1000);
     }
     return data;
   }
@@ -65,7 +65,7 @@ class UserService extends alaska.Service {
     data = await Role.find().sort('-sort');
     if (data.length) {
       //缓存10分钟
-      await cache.set('abilities_list', Role.castModelArray(data), 600);
+      await cache.set('abilities_list', Role.castModelArray(data), 600 * 1000);
     }
     return data;
   }
