@@ -92,11 +92,6 @@ export default class User extends alaska.Model {
    * @returns {boolean}
    */
   async hasAbility(id) {
-    let superUser = alaska.config('superUser');
-    if (superUser && this.id === superUser) {
-      return true;
-    }
-
     //查找用户特殊权限
     if (this.abilities) {
       for (let aid of this.abilities) {

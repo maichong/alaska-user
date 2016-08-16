@@ -5,11 +5,9 @@
  */
 
 import alaska from 'alaska';
-import collie from 'collie';
 
 /**
  * @class UserService
- * @event UserService#create-user
  */
 class UserService extends alaska.Service {
   constructor(options) {
