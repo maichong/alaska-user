@@ -17,6 +17,7 @@ module.exports = function () {
   }
 
   return async function userMiddleware(ctx, next) {
+    if (!ctx.session) return next();
     let userId = ctx.session.userId;
     ctx.user = null;
 
