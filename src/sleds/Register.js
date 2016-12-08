@@ -31,10 +31,19 @@ export default class Register extends alaska.Sled {
     }
     let user = data.user;
     if (!user) {
-      let username = data.username;
-      let count = await User.count({ username });
+      let count = await User.count({
+        username: new RegExp(alaska.util.escapeRegExp(data.username), 'i')
+      });
       if (count) {
         service.error('Username is exists');
+      }
+      if (data.email) {
+        let emailCount = await User.count({
+          email: new RegExp(alaska.util.escapeRegExp(data.email), 'i')
+        });
+        if (emailCount) {
+          service.error('Email is exists');
+        }
       }
       user = new User(_.omit(data, 'ctx', 'user'));
     }

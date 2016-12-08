@@ -19,6 +19,7 @@ export default {
   'Password is required': '请输入密码',
   'New password is required': '请输入新密码',
   'Username is exists': '用户名已经存在',
+  'Email is exists': 'Email已经存在',
   'Close Register': '关闭注册',
   'Close Register Reason': '关闭注册原因'
 };

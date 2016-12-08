@@ -1,6 +1,6 @@
 {
   "name": "alaska-user",
-  "version": "0.10.4",
+  "version": "0.10.5",
   "description": "Alaska user service",
   "keywords": [
     "alaska",
@@ -28,16 +28,16 @@
   },
   "homepage": "https://github.com/maichong/alaska-user#readme",
   "peerDependencies": {
-    "alaska": "^0.10.9"
+    "alaska": "^0.10.10"
   },
   "dependencies": {
     "alaska-field-datetime": "^0.10.2",
     "alaska-field-image": "^0.10.2",
-    "alaska-field-number": "^0.10.2",
+    "alaska-field-number": "^0.10.3",
     "alaska-field-password": "^0.10.1",
     "alaska-field-relationship": "^0.10.2",
     "alaska-field-text": "^0.10.3",
-    "alaska-middleware-session": "^0.2.1",
+    "alaska-middleware-session": "^0.2.2",
     "alaska-settings": "^0.10.1"
   }
 }
