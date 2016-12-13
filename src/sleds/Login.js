@@ -33,7 +33,7 @@ export default class Login extends alaska.Sled {
     let user = data.user;
     if (!user) {
       user = await User.findOne({
-        username: new RegExp(alaska.util.escapeRegExp(data.username), 'i')
+        username: new RegExp('^' + alaska.util.escapeRegExp(data.username) + '$', 'i')
       });
       if (!user) {
         service.error('Incorrect username or password', 1101);
