@@ -25,7 +25,7 @@ export default function Encryption(password) {
   };
 
   encryption.hash = function (input) {
-    return crypto.createHash('sha256').update(password).digest('base64');
+    return crypto.createHash('sha256').update(input).digest('base64');
   };
 
   return encryption;
